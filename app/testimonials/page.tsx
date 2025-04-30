@@ -169,7 +169,7 @@ const TestimonialsPage: React.FC = () => {
           >
             <h2 className="text-3xl font-bold text-gray-900 mb-4">What Our Users Say</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Don't just take our word for it - here's what professionals using our platform have to say
+              Don&apos;t just take our word for it - here&apos;s what professionals using our platform have to say
             </p>
           </div>
           
@@ -181,7 +181,7 @@ const TestimonialsPage: React.FC = () => {
               >
                 <Card className="h-full flex flex-col">
                   <CardContent className="pt-6 flex-grow">
-                    <p className="text-gray-600 italic mb-6">"{testimonial.quote}"</p>
+                    <p className="text-gray-600 italic mb-6">&quot;{testimonial.quote}&quot;</p>
                   </CardContent>
                   <CardFooter className="border-t pt-4">
                     <div className="flex items-center gap-4">
@@ -213,7 +213,7 @@ const TestimonialsPage: React.FC = () => {
               Ready to Write Your Success Story?
             </h2>
             <p className="text-lg text-gray-600 mb-8">
-              Join thousands of professionals who've transformed their careers with remote AI jobs
+              Join thousands of professionals who&apos;ve transformed their careers with remote AI jobs
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" asChild>

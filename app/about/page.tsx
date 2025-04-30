@@ -95,7 +95,7 @@ const AboutPage: React.FC = () => {
               About RemoteAIJobs
             </h1>
             <p className="text-xl text-gray-600 mb-8">
-              We're on a mission to connect AI talent with the best remote
+              We&apos;re on a mission to connect AI talent with the best remote
               opportunities worldwide.
             </p>
           </div>
@@ -111,13 +111,13 @@ const AboutPage: React.FC = () => {
                 Our Mission
               </h2>
               <p className="text-lg text-gray-600 mb-4">
-                At RemoteAIJobs, we believe that talent shouldn't be limited by
+                At RemoteAIJobs, we believe that talent shouldn&apos;t be limited by
                 geography. Our platform connects AI professionals with remote
                 opportunities that allow them to work from anywhere while
                 advancing their careers.
               </p>
               <p className="text-lg text-gray-600 mb-6">
-                We're dedicated to bridging the gap between companies seeking
+                We&apos;re dedicated to bridging the gap between companies seeking
                 specialized AI talent and professionals looking for flexible,
                 remote work arrangements.
               </p>
@@ -145,7 +145,7 @@ const AboutPage: React.FC = () => {
               Our Journey
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Since our founding, we've been on a mission to transform how AI
+              Since our founding, we&apos;ve been on a mission to transform how AI
               professionals find remote work
             </p>
           </div>
@@ -218,7 +218,7 @@ const AboutPage: React.FC = () => {
               Ready to Find Your Next Remote AI Job?
             </h2>
             <p className="text-lg text-gray-600 mb-8">
-              Join thousands of professionals who've found their dream remote
+              Join thousands of professionals who&apos;ve found their dream remote
               positions through our platform.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
