@@ -19,7 +19,7 @@ const TestimonialSlider: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {TESTIMONIALS.map((testimonial, index) => (
+          {TESTIMONIALS.map((testimonial, ) => (
             <div key={testimonial.id}>
               <Card className="h-full flex flex-col">
                 <CardContent className="pt-6 flex-grow">

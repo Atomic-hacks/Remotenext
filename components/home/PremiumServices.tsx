@@ -20,7 +20,7 @@ const PremiumServices: React.FC = () => {
           className="grid grid-cols-1 md:grid-cols-3 gap-6"
          
         >
-          {PREMIUM_SERVICES.map((service, index) => (
+          {PREMIUM_SERVICES.map((service, ) => (
             <div
               key={service.id}
               
