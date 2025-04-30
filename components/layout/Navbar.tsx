@@ -1,13 +1,15 @@
 import React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 const Navbar: React.FC = () => {
   return (
     <header className="w-full py-4 px-6 bg-white border-b border-gray-100">
       <div className="container mx-auto flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <span className="font-bold text-xl text-gray-900">RemoteAIJobs</span>
+          <span className="font-bold text-xl text-gray-900">RemoteNext</span>
+          <Image src='/logo.jpg' alt='logo' width={40} height={40}/>
         </Link>
 
         <nav className="hidden md:flex items-center space-x-6">
