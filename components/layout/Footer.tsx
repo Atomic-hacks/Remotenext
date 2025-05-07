@@ -175,7 +175,7 @@ const Footer: React.FC = () => {
           className="mt-12 pt-8 border-t border-neutral-800 flex flex-col md:flex-row items-center justify-between gap-4"
         >
           <p className="text-neutral-500 text-sm">
-            &copy; {currentYear} RemoteAIJobs. All rights reserved.
+            &copy; {currentYear} RemoteNext. All rights reserved.
           </p>
           <div className="flex flex-wrap justify-center gap-6">
             <Link href="/terms" className="text-neutral-500 hover:text-neutral-300 text-sm transition-colors">
