@@ -22,18 +22,6 @@ const FooterLink: React.FC<FooterLinkProps> = ({ href, children }) => {
   );
 };
 
-interface FooterHeadingProps {
-  children: React.ReactNode;
-}
-
-const FooterHeading: React.FC<FooterHeadingProps> = ({ children }) => {
-  return (
-    <h3 className="text-xl font-semibold text-white mb-6">
-      {children}
-    </h3>
-  );
-};
-
 const Footer: React.FC = () => {
   const [currentYear] = useState<number>(new Date().getFullYear());
   
@@ -75,7 +63,10 @@ const Footer: React.FC = () => {
         >
           {/* Company Information */}
           <motion.div variants={itemVariants}>
-            <FooterHeading>RemoteAIJobs</FooterHeading>
+          <motion.div className="flex items-center gap-2 flex-shrink-0" whileHover={{ scale: 1.05 }}>
+          <img src='/logo.jpg' alt="RemoteNext" className="h-8 sm:h-10" />
+          <p className="sm:text-[28px] text-xl text-transparent bg-clip-text bg-gradient-to-tr from-white via-neutral-300 to-white">RemoteNext</p>
+        </motion.div>
             <p className="text-neutral-400 mb-6">
               Finding your perfect AI and remote job opportunity, fast and easy.
             </p>
@@ -102,7 +93,7 @@ const Footer: React.FC = () => {
 
           {/* Quick Links */}
           <motion.div variants={itemVariants}>
-            <FooterHeading>Quick Links</FooterHeading>
+            <h3>Quick Links</h3>
             <ul className="space-y-3">
               <FooterLink href="/">Home</FooterLink>
               <FooterLink href="/jobs">Browse Jobs</FooterLink>
@@ -114,7 +105,7 @@ const Footer: React.FC = () => {
 
           {/* Resources */}
           <motion.div variants={itemVariants}>
-            <FooterHeading>Resources</FooterHeading>
+            <h3>Resources</h3>
             <ul className="space-y-3">
               <FooterLink href="/blog">Blog</FooterLink>
               <FooterLink href="/resources">Remote Work Guide</FooterLink>
@@ -126,7 +117,7 @@ const Footer: React.FC = () => {
 
           {/* Contact */}
           <motion.div variants={itemVariants}>
-            <FooterHeading>Get In Touch</FooterHeading>
+            <h3>Get In Touch</h3>
             <ul className="space-y-4">
               <li className="flex items-start">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-neutral-400 mr-3 mt-1">

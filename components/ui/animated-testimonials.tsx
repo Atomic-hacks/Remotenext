@@ -46,6 +46,7 @@ export const AnimatedTestimonials = ({
 
   return (
     <div className="rounded-2xl bg-neutral-300 mx-auto w-full px-4 py-16 md:py-24 font-sans antialiased">
+        <h1 className="text-3xl text-center md:text-5xl mb-10">What our Clients Say</h1>
       <div className="relative grid grid-cols-1 gap-10 md:gap-16 lg:gap-20 md:grid-cols-2 items-center">
         {/* Image Section */}
         <div className="relative h-96 md:h-[28rem] w-full overflow-visible">
