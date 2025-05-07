@@ -1,60 +1,173 @@
-import React from "react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
+'use client'
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaXmark } from "react-icons/fa6";
+import { BiMenu } from "react-icons/bi";
+import MagicButton from "../ui/MagicButton";
+import { ArrowRight } from "lucide-react";
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
+ 
+  const [width, setWidth] = useState("100%");
+  const [navOpen, setNavOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      
+      const newWidth = 100 - (scrollPosition / 20);
+      
+      // Minimum width increased to 90% to prevent text collisions
+      setWidth(`${Math.max(newWidth, 90)}%`);
+      setIsScrolled(scrollPosition > 20); 
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const links = [
+    { name: "Home", link: "/" },
+    { name: "About", link: "/about" },
+    { name: "Services", link: "/services" },
+    { name: "Contact", link: "/contact" },
+  ];
+
+  const navVariants = {
+    hidden: { y: -100, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 20,
+      },
+    },
+  };
+
+  const mobileMenuVariants = {
+    hidden: { x: "100%", opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 20,
+      },
+    },
+  };
+
   return (
-    <header className="w-full py-4 px-6 bg-white border-b border-gray-100">
-      <div className="container mx-auto flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="font-bold text-xl text-gray-900">RemoteNext</span>
-          <Image src='/logo.jpg' alt='logo' width={40} height={40}/>
-        </Link>
+    <motion.div
+     className="max-w-5xl mx-auto fixed left-1/2 transform -translate-x-1/2 top-0 w-full py-5 px-4 sm:px-6 lg:px-8 z-50"
+      initial="hidden"
+      animate="visible"
+      variants={navVariants}
+    >
+      <motion.div
+        style={{ width }}
+        className={`flex bg-white justify-between mx-auto h-fit rounded-xl px-4 py-2 items-center transition-all duration-300 shadow-2xl ${
+          isScrolled
+            ? " backdrop-blur-3xl opacity-90 "
+            : " backdrop-blur-lg"
+        }`}
+      >
+        {/* Logo */}
+        <motion.div className="flex items-center gap-2 flex-shrink-0" whileHover={{ scale: 1.05 }}>
+          <img src='/logo.jpg' alt="RemoteNext" className="h-8 sm:h-10" />
+          <p className="sm:text-[28px] text-xl text-transparent bg-clip-text bg-gradient-to-tr from-black via-neutral-500 to-black">RemoteNext</p>
+        </motion.div>
 
-        <nav className="hidden md:flex items-center space-x-6">
-          <Link
-            href="/"
-            className="text-gray-600 hover:text-gray-900 transition-colors"
-          >
-            Home
-          </Link>
-          <Link
-            href="/jobs"
-            className="text-gray-600 hover:text-gray-900 transition-colors"
-          >
-            Jobs
-          </Link>
-          <Link
-            href="/about"
-            className="text-gray-600 hover:text-gray-900 transition-colors"
-          >
-            About
-          </Link>
-          <Link
-            href="/testimonials"
-            className="text-gray-600 hover:text-gray-900 transition-colors"
-          >
-            Testimonials
-          </Link>
-          <Link
-            href="/contact"
-            className="text-gray-600 hover:text-gray-900 transition-colors"
-          >
-            Contact
-          </Link>
-        </nav>
+        {/* Desktop Navigation - added flex-shrink-0 to prevent shrinking */}
+        <div className="hidden lg:flex items-center space-x-4 flex-shrink-0">
+          <nav className="flex items-center space-x-1">
+            {links.map((link, index) => (
+              <motion.a
+                key={index}
+                href={link.link}
+                className="text-black rounded-full hover:border hover:border-neutral-700 hover:bg-neutral-100 px-1 py-1 font-normal transition-all duration-300 whitespace-nowrap"
+                whileTap={{ scale: 0.95 }}
+              >
+                {link.name}
+              </motion.a>
+            ))}
+          </nav>
 
-        <div className="flex items-center gap-3">
-          <Button variant="outline" size="sm" asChild>
-            <Link href="/login">Log in</Link>
-          </Button>
-          <Button size="sm" asChild>
-            <Link href="/signup">Sign up</Link>
-          </Button>
+          <motion.a
+            href="/get-started"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex-shrink-0"
+          >
+            <MagicButton title="Get In Touch" icon={<ArrowRight />} position="right" buttonClasses="!w-full" />
+          </motion.a>
         </div>
-      </div>
-    </header>
+
+        {/* Mobile Menu Button */}
+        <motion.button
+          onClick={() => setNavOpen(!navOpen)}
+          className="lg:hidden p-2 text-black hover:bg-black/10 rounded-full transition-colors flex-shrink-0"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          {navOpen ? <FaXmark size={24} /> : <BiMenu size={24} />}
+        </motion.button>
+      </motion.div>
+
+      {/* Mobile Navigation */}
+      <AnimatePresence>
+        {navOpen && (
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={mobileMenuVariants}
+            className="md:hidden fixed inset-y-0 right-0 w-full sm:w-[350px] opacity-80 backdrop-blur-2xl p-6 shadow-xl"
+          >
+            <div className="flex flex-col h-full">
+              <div className="flex justify-end">
+                <motion.button
+                  onClick={() => setNavOpen(false)}
+                  className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <FaXmark size={24} />
+                </motion.button>
+              </div>
+
+              <nav className="flex flex-col space-y-6 mt-10">
+                {links.map((link, index) => (
+                  <motion.a
+                    key={index}
+                    href={link.link}
+                    className="text-white/90 hover:text-white px-4 py-2 text-lg font-medium transition-colors"
+                    whileHover={{ x: 10 }}
+                    onClick={() => setNavOpen(false)}
+                  >
+                    {link.name}
+                  </motion.a>
+                ))}
+              </nav>
+
+              <div className="mt-auto pb-8">
+                <motion.a
+                  href="/get-started"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setNavOpen(false)}
+                >
+                  <MagicButton title="Get started" icon={<ArrowRight />} position="right" buttonClasses="!w-full" />
+                </motion.a>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 };
 
