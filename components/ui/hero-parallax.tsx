@@ -209,9 +209,9 @@ const sampleFeatures: Feature[] = [
 // Horizontal Feature Card Component
 const FeatureCardHorizontal: React.FC<{
   feature: Feature;
-  index: number;
+  index?: number;
   variants: any;
-}> = ({ feature, index, variants }) => {
+}> = ({ feature, variants }) => {
   return (
     <motion.div 
       variants={variants}
@@ -258,9 +258,9 @@ const FeatureCardHorizontal: React.FC<{
 // Vertical Feature Card with Framer Motion
 const FeatureCardVertical: React.FC<{
   feature: Feature;
-  index: number;
+  index?: number;
   variants: any;
-}> = ({ feature, index, variants }) => {
+}> = ({ feature, variants }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (

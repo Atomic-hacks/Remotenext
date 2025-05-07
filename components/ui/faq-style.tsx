@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 
-
 type FAQItem = {
   question: string;
   answer: string;
@@ -185,7 +184,9 @@ export const ModernFAQ = ({
                     }}
                   >
                     <div
-                      ref={(el) => (answerRefs.current[actualIndex] = el)}
+                      ref={(el) => {
+                        answerRefs.current[actualIndex] = el;
+                      }}
                       className="p-6 text-neutral-600 dark:text-neutral-300"
                     >
                       <p className="whitespace-pre-line">{item.answer}</p>
@@ -229,15 +230,15 @@ export const ModernFAQ = ({
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-16 rounded-2xl overflow-hidden relative"
         >
-          
-          <div className="p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 z-30 relative"><div className="absolute inset-0 w-full h-full overflow-hidden -z-20">
-            <img src="/texture1.jpg" alt="texture" className="object-cover" />
-          </div>
+          <div className="p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 z-30 relative">
+            <div className="absolute inset-0 w-full h-full overflow-hidden -z-20">
+              <img src="/texture1.jpg" alt="texture" className="object-cover" />
+            </div>
             <div>
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
                 Still have questions?
               </h3>
-              <p className="text-neutral-300 max-w-lg x">
+              <p className="text-neutral-300 max-w-lg">
                 Can&apos;t find the answer you&apos;re looking for? Please contact our
                 friendly support team.
               </p>

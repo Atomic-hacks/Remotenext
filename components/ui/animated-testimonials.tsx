@@ -167,9 +167,9 @@ export const AnimatedTestimonials = ({
               </div>
               
               <div className="relative">
-                <div className="absolute -left-4 -top-2 text-5xl font-serif text-neutral-300 dark:text-neutral-700">"</div>
+                <div className="absolute -left-4 -top-2 text-5xl font-serif text-neutral-300 dark:text-neutral-700">&ldquo;</div>
                 <motion.p className="relative mt-6 text-lg md:text-xl text-neutral-600 dark:text-neutral-300 leading-relaxed">
-                  {testimonials[active].quote.split(`&quot;`).map((word, index) => (
+                  {testimonials[active].quote.split(" ").map((word, index) => (
                     <motion.span
                       key={index}
                       initial={{
