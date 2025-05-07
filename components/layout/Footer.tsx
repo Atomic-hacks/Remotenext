@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
@@ -35,7 +35,7 @@ const FooterHeading: React.FC<FooterHeadingProps> = ({ children }) => {
 };
 
 const Footer: React.FC = () => {
-  const [currentYear, setCurrentYear] = useState<number>(new Date().getFullYear());
+  const [currentYear] = useState<number>(new Date().getFullYear());
   
   // Animation variants
   const containerVariants = {

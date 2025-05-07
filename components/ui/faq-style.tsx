@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
+
 
 type FAQItem = {
   question: string;
@@ -215,7 +215,7 @@ export const ModernFAQ = ({
                 No results found
               </h3>
               <p className="text-neutral-600 dark:text-neutral-400">
-                Try adjusting your search or filter to find what you're looking
+                Try adjusting your search or filter to find what you&apos;re looking
                 for.
               </p>
             </div>
@@ -238,7 +238,7 @@ export const ModernFAQ = ({
                 Still have questions?
               </h3>
               <p className="text-neutral-300 max-w-lg x">
-                Can't find the answer you're looking for? Please contact our
+                Can&apos;t find the answer you&apos;re looking for? Please contact our
                 friendly support team.
               </p>
             </div>

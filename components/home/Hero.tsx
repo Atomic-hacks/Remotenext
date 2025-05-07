@@ -2,7 +2,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import MagicButton from "../ui/MagicButton";
 import { ArrowRight } from "lucide-react";
-import { HeroScrollDemo } from "../ui/HeroScroll";
 
 interface HeroProps {
   videoSrc?: string;

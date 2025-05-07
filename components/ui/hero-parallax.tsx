@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 'use client';
 
-import React, { useRef, useEffect, useState } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import React, { useRef, useState } from "react";
+import { motion } from "framer-motion";
 import { FaAngleRight } from "react-icons/fa6";
 import { FiArrowUpRight } from "react-icons/fi";
 

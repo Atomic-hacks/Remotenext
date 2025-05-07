@@ -4,7 +4,6 @@ import React, { useRef } from 'react';
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { JOB_CATEGORIES } from "@/lib/constants";
-import { Card, CardContent } from "@/components/ui/card";
 import { Briefcase, MapPin, Calendar, ArrowRight } from 'lucide-react';
 
 // Sample job listings based on the screenshot
