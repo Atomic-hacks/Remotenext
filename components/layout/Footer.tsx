@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="relative overflow-hidden bg-neutral-900 z-10">
+    <footer className="relative overflow-hidden bg-neutral-900 z-10 rounded-2xl mt-20">
       {/* Texture background */}
       <div className="absolute inset-0 w-full h-full overflow-hidden -z-10 opacity-20">
         <img src="/texture1.jpg" alt="" className="object-cover w-full h-full" />

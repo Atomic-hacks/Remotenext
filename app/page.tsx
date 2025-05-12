@@ -15,7 +15,7 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div className='relative px-2 py-2'>
+    <div className='relative '>
       <Hero/>
      <LogoCarouselPreview/>
      <HeroParallaxDemo/>

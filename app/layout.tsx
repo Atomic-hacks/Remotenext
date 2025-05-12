@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${jakarta.className} antialiased`}
+        className={`${jakarta.className} antialiased px-2 py-3`}
       >
        <Navbar/>
         {children}
