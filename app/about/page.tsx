@@ -138,7 +138,7 @@ const ParallaxSection: React.FC<{ children: React.ReactNode }> = ({ children }) 
 
 const AboutPage: React.FC = () => {
   return (
-    <main className="bg-gradient-to-b rounded-2xl from-neutral-300 to-neutral-400 min-h-screen">
+    <main className="bg-gradient-to-b  min-h-screen">
       {/* Hero Section with Continuous Animation */}
       <motion.section 
         className="relative py-20 overflow-hidden"
@@ -183,7 +183,7 @@ const AboutPage: React.FC = () => {
 
       {/* Mission Section with Parallax */}
       <ParallaxSection>
-        <section className="py-16">
+        <section className="py-16 rounded-2xl bg-gradient-to-b from-neutral-300 to-neutral-400">
           <div className="container mx-auto px-6">
             <motion.div 
               className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
@@ -232,7 +232,7 @@ const AboutPage: React.FC = () => {
       </ParallaxSection>
 
       {/* Milestones Section */}
-      <section className="py-16 bg-neutral-50 rounded-2xl">
+      <section className="py-16 rounded-2xl bg-gradient-to-b from-neutral-300 to-neutral-400">
         <div className="container mx-auto px-6">
           <motion.div 
             className="text-center mb-12"
@@ -290,7 +290,7 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Team Section */}
-      <section className="py-16">
+      <section className="my-24 py-16 bg-gradient-to-b rounded-2xl from-neutral-300 to-neutral-400">
         <div className="container mx-auto px-6">
           <motion.div 
             className="text-center mb-12"
@@ -355,7 +355,10 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-neutral-50">
+      <section className="py-16 relative rounded-2xl bg-gradient-to-b from-neutral-300 to-neutral-400 z-20 overflow-hidden">
+         <div className="absolute inset-0 w-full h-full overflow-hidden -z-20">
+              <img src="/texture1.jpg" alt="texture" className="object-cover" />
+            </div>
         <div className="container mx-auto px-6">
           <motion.div 
             className="text-center max-w-3xl mx-auto"
@@ -366,13 +369,13 @@ const AboutPage: React.FC = () => {
           >
             <motion.h2 
               variants={titleVariants}
-              className="text-3xl font-bold text-neutral-800 mb-6"
+              className="text-3xl font-bold text-neutral-200 mb-6"
             >
               Ready to Find Your Next Remote AI Job?
             </motion.h2>
             <motion.p 
               variants={titleVariants}
-              className="text-lg text-neutral-600 mb-8"
+              className="text-lg text-neutral-400 mb-8"
             >
               Join thousands of professionals who&apos;ve found their dream remote positions through our platform.
             </motion.p>
