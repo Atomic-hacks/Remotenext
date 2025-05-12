@@ -1,6 +1,5 @@
 'use client'
 import React, { useRef } from "react";
-import { Metadata } from "next";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
