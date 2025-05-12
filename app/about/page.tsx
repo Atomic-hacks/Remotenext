@@ -8,13 +8,7 @@ import { FiArrowUpRight } from "react-icons/fi";
 
 // Ensure Framer Motion is configured to work with Next.js
 // This prevents SSR-related warnings and ensures smooth animations
-const pageVariants = {
-  initial: { 
-    opacity: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeInOut"
-    }
+
   },
   in: { 
     opacity: 1,
