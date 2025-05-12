@@ -9,23 +9,6 @@ import { FiArrowUpRight } from "react-icons/fi";
 // Ensure Framer Motion is configured to work with Next.js
 // This prevents SSR-related warnings and ensures smooth animations
 
-  },
-  in: { 
-    opacity: 1,
-    transition: {
-      duration: 0.5,
-      ease: "easeInOut"
-    }
-  },
-  out: { 
-    opacity: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeInOut"
-    }
-  }
-};
-
 
 interface TeamMember {
   id: string;
