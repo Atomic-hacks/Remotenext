@@ -5,7 +5,7 @@ import Hero from '@/components/home/Hero'
 import JobCategories from '@/components/home/JobCategories'
 import { AnimatedTestimonialsDemo } from '@/components/home/TestimonialSlider'
 import WhyChooseRemoteNext from '@/components/home/WhyChoose'
-import LogoCarouselPreview from '@/components/ui/LogoCarousel'
+import LogoCarouselFade from '@/components/ui/LogoCarousel'
 //import JobCard from '@/components/home/JobCard'
 //import JobCategories from '@/components/home/JobCategories'
 //import Newsletter from '@/components/home/Newsletter'
@@ -17,7 +17,7 @@ const page = () => {
   return (
     <div className='relative '>
       <Hero/>
-     <LogoCarouselPreview/>
+     <LogoCarouselFade/>
      <HeroParallaxDemo/>
      <WhyChooseRemoteNext/>
      <AnimatedTestimonialsDemo />

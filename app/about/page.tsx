@@ -9,6 +9,13 @@ import { FiArrowUpRight } from "react-icons/fi";
 // Ensure Framer Motion is configured to work with Next.js
 // This prevents SSR-related warnings and ensures smooth animations
 
+// Define orange-yellow theme color for consistent use
+const accentColor = {
+  primary: 'rgb(255, 165, 0)', // Vivid orange
+  light: 'rgb(255, 205, 100)', // Light orange-yellow
+  dark: 'rgb(230, 140, 0)',    // Darker orange
+  gradient: 'linear-gradient(135deg, rgb(255, 180, 50), rgb(255, 140, 0))'
+};
 
 interface TeamMember {
   id: string;
@@ -23,7 +30,7 @@ const TEAM_MEMBERS: TeamMember[] = [
     id: "member-1",
     name: "Alex Morgan",
     role: "Founder & CEO",
-    bio: "Alex has over 15 years of experience in tech recruitment and AI. Previously worked at leading tech companies before founding RemoteAIJobs to connect talented professionals with remote opportunities.",
+    bio: "Alex has over 15 years of experience in tech recruitment and AI. Previously worked at leading tech companies before founding remotenext to connect talented professionals with remote opportunities.",
     image: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80",
   },
   {
@@ -40,7 +47,6 @@ const TEAM_MEMBERS: TeamMember[] = [
     bio: "Taylor brings extensive experience in AI and machine learning, helping to vet opportunities and ensure our platform connects the right talent with the right positions.",
     image:  "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80",
   },
-
 ];
 
 interface Milestone {
@@ -56,7 +62,7 @@ const MILESTONES: Milestone[] = [
     year: "2022",
     title: "Our Beginning",
     description:
-      "RemoteAIJobs was founded with a mission to connect AI professionals with quality remote opportunities.",
+      "remotenext was founded with a mission to connect AI professionals with quality remote opportunities.",
   },
   {
     id: "milestone-2",
@@ -138,7 +144,7 @@ const ParallaxSection: React.FC<{ children: React.ReactNode }> = ({ children }) 
 
 const AboutPage: React.FC = () => {
   return (
-    <main className="bg-gradient-to-b  min-h-screen">
+    <main className="bg-gradient-to-b min-h-screen">
       {/* Hero Section with Continuous Animation */}
       <motion.section 
         className="relative py-20 overflow-hidden"
@@ -151,10 +157,17 @@ const AboutPage: React.FC = () => {
           }
         }}
       >
-        {/* Subtle background elements */}
+        {/* Subtle background elements with orange-yellow accents */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
           <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-white rounded-full opacity-20 blur-3xl"></div>
-          <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-neutral-300 rounded-full opacity-20 blur-3xl"></div>
+          <div 
+            className="absolute bottom-1/3 right-1/4 w-96 h-96 rounded-full opacity-20 blur-3xl"
+            style={{ background: accentColor.light, mixBlendMode: 'soft-light' }}
+          ></div>
+          <div 
+            className="absolute top-1/2 right-1/3 w-48 h-48 rounded-full opacity-10 blur-3xl"
+            style={{ background: accentColor.primary }}
+          ></div>
         </div>
 
         <div className="container mx-auto px-6 relative z-10">
@@ -169,7 +182,7 @@ const AboutPage: React.FC = () => {
               variants={titleVariants}
               className="text-4xl md:text-5xl font-bold text-neutral-800 mb-6"
             >
-              About RemoteNext
+              About <span style={{ color: accentColor.primary }}>RemoteNext</span>
             </motion.h1>
             <motion.p 
               variants={titleVariants}
@@ -194,15 +207,23 @@ const AboutPage: React.FC = () => {
             >
               <motion.div variants={itemVariants}>
                 <h2 className="text-3xl font-bold text-neutral-800 mb-6">
-                  Our Mission
+                  Our <span style={{ color: accentColor.primary }}>Mission</span>
                 </h2>
                 <p className="text-lg text-neutral-600 mb-4">
-                  At RemoteAIJobs, we believe that talent shouldn&apos;t be limited by geography. Our platform connects AI professionals with remote opportunities that allow them to work from anywhere while advancing their careers.
+                  At remotenext, we believe that talent shouldn&apos;t be limited by geography. Our platform connects AI professionals with remote opportunities that allow them to work from anywhere while advancing their careers.
                 </p>
                 <p className="text-lg text-neutral-600 mb-6">
                   We&apos;re dedicated to bridging the gap between companies seeking specialized AI talent and professionals looking for flexible, remote work arrangements.
                 </p>
-                <Button size="lg" asChild className="group">
+                <Button 
+                  size="lg" 
+                  asChild 
+                  className="group transition-all duration-300"
+                  style={{ 
+                    background: accentColor.gradient,
+                    border: 'none'
+                  }}
+                >
                   <Link href="/jobs" className="flex items-center gap-2">
                     Browse Jobs
                     <motion.span
@@ -220,11 +241,17 @@ const AboutPage: React.FC = () => {
               </motion.div>
 
               <motion.div variants={itemVariants}>
-                <img
-                  src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"
-                  alt="Team collaboration"
-                  className="rounded-xl shadow-lg w-full hover:scale-105 transition-transform duration-300"
-                />
+                <div className="relative group">
+                  <div 
+                    className="absolute -inset-1 opacity-0 group-hover:opacity-100 rounded-xl blur-sm transition-all duration-500"
+                    style={{ background: accentColor.gradient, zIndex: -1 }}
+                  ></div>
+                  <img
+                    src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80"
+                    alt="Team collaboration"
+                    className="rounded-xl shadow-lg w-full hover:scale-105 transition-transform duration-300 relative z-10"
+                  />
+                </div>
               </motion.div>
             </motion.div>
           </div>
@@ -245,7 +272,7 @@ const AboutPage: React.FC = () => {
               variants={titleVariants}
               className="text-3xl font-bold text-neutral-800 mb-4"
             >
-              Our Journey
+              Our <span style={{ color: accentColor.primary }}>Journey</span>
             </motion.h2>
             <motion.p 
               variants={titleVariants}
@@ -272,9 +299,16 @@ const AboutPage: React.FC = () => {
                   transition: { duration: 0.3 }
                 }}
               >
-                <Card className="h-full">
-                  <CardContent className="pt-6">
-                    <span className="text-2xl font-bold text-neutral-800">
+                <Card className="h-full group overflow-hidden relative border">
+                  <div 
+                    className="absolute top-0 left-0 w-1 h-full transition-all duration-300 group-hover:h-full group-hover:w-full group-hover:opacity-10"
+                    style={{ background: accentColor.gradient }}
+                  ></div>
+                  <CardContent className="pt-6 relative z-10">
+                    <span 
+                      className="text-2xl font-bold"
+                      style={{ color: accentColor.primary }}
+                    >
                       {milestone.year}
                     </span>
                     <h3 className="text-xl font-semibold mt-2 mb-3 text-neutral-700">
@@ -303,13 +337,13 @@ const AboutPage: React.FC = () => {
               variants={titleVariants}
               className="text-3xl font-bold text-neutral-800 mb-4"
             >
-              Meet Our Team
+              Meet Our <span style={{ color: accentColor.primary }}>Team</span>
             </motion.h2>
             <motion.p 
               variants={titleVariants}
               className="text-neutral-600 max-w-2xl mx-auto"
             >
-              The passionate individuals behind RemoteAIJobs dedicated to your success
+              The passionate individuals behind remotenext dedicated to your success
             </motion.p>
           </motion.div>
 
@@ -330,8 +364,12 @@ const AboutPage: React.FC = () => {
                   transition: { duration: 0.3 }
                 }}
               >
-                <Card className="h-full flex flex-col group">
-                  <div className="w-full h-64 overflow-hidden rounded-t-xl">
+                <Card className="h-full flex flex-col group overflow-hidden">
+                  <div className="w-full h-64 overflow-hidden rounded-t-xl relative">
+                    <div 
+                      className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300"
+                      style={{ background: accentColor.gradient }}
+                    ></div>
                     <motion.img
                       src={member.image}
                       alt={member.name}
@@ -339,10 +377,13 @@ const AboutPage: React.FC = () => {
                     />
                   </div>
                   <CardContent className="pt-6 flex-grow">
-                    <h3 className="text-xl font-semibold mb-1 text-neutral-800">
+                    <h3 className="text-xl font-semibold mb-1 text-neutral-800 group-hover:text-neutral-800 transition-colors duration-300">
                       {member.name}
                     </h3>
-                    <p className="text-neutral-600 font-medium mb-3">
+                    <p 
+                      className="font-medium mb-3 transition-colors duration-300"
+                      style={{ color: accentColor.primary }}
+                    >
                       {member.role}
                     </p>
                     <p className="text-neutral-500">{member.bio}</p>
@@ -355,10 +396,26 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 relative rounded-2xl bg-gradient-to-b from-neutral-300 to-neutral-400 z-20 overflow-hidden">
-         <div className="absolute inset-0 w-full h-full overflow-hidden -z-20">
-              <img src="/texture1.jpg" alt="texture" className="object-cover" />
-            </div>
+      <section className="py-16 relative rounded-2xl z-20 overflow-hidden" style={{ 
+        background: 'linear-gradient(to bottom, rgba(60, 60, 60, 0.9), rgba(40, 40, 40, 0.95))',
+        boxShadow: '0 0 40px rgba(0, 0, 0, 0.2)'
+      }}>
+        <div className="absolute inset-0 w-full h-full overflow-hidden -z-20 opacity-30">
+          <img src="/texture1.jpg" alt="texture" className="object-cover" />
+        </div>
+        
+        {/* Orange accent design elements */}
+        <div className="absolute top-0 right-0 w-full h-full overflow-hidden pointer-events-none -z-10">
+          <div 
+            className="absolute top-1/4 right-1/4 w-64 h-64 rounded-full opacity-10 blur-3xl"
+            style={{ background: accentColor.primary }}
+          ></div>
+          <div 
+            className="absolute bottom-1/4 left-1/3 w-32 h-32 rounded-full opacity-15 blur-xl"
+            style={{ background: accentColor.light }}
+          ></div>
+        </div>
+        
         <div className="container mx-auto px-6">
           <motion.div 
             className="text-center max-w-3xl mx-auto"
@@ -371,7 +428,7 @@ const AboutPage: React.FC = () => {
               variants={titleVariants}
               className="text-3xl font-bold text-neutral-200 mb-6"
             >
-              Ready to Find Your Next Remote AI Job?
+              Ready to Find Your Next <span style={{ color: accentColor.light }}>Remote AI Job</span>?
             </motion.h2>
             <motion.p 
               variants={titleVariants}
@@ -383,7 +440,15 @@ const AboutPage: React.FC = () => {
               className="flex flex-col sm:flex-row gap-4 justify-center"
               variants={containerVariants}
             >
-              <Button size="lg" asChild className="group">
+              <Button 
+                size="lg" 
+                asChild 
+                className="group hover:scale-105 transition-all duration-300"
+                style={{ 
+                  background: accentColor.gradient,
+                  border: 'none'
+                }}
+              >
                 <Link href="/signup" className="flex items-center gap-2">
                   Sign Up Now
                   <motion.span
@@ -398,7 +463,16 @@ const AboutPage: React.FC = () => {
                   </motion.span>
                 </Link>
               </Button>
-              <Button variant="outline" size="lg" asChild className="group">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                asChild 
+                className="group transition-all duration-300 border-2 hover:bg-transparent"
+                style={{ 
+                  borderColor: accentColor.primary,
+                  color: accentColor.light
+                }}
+              >
                 <Link href="/contact" className="flex items-center gap-2">
                   Contact Us
                   <motion.span
@@ -415,9 +489,10 @@ const AboutPage: React.FC = () => {
               </Button>
             </motion.div>
           </motion.div>
-          </div>
-          </section>
-          </main>
-)}
+        </div>
+      </section>
+    </main>
+  );
+};
 
 export default AboutPage;

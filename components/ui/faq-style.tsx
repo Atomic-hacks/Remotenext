@@ -56,8 +56,10 @@ export const ModernFAQ = ({
       >
         {/* Header */}
         <div className="text-center mb-16">
+          {/* Orange accent line */}
+          <div className="h-1 w-16 bg-amber-500 rounded-full mx-auto mb-6"></div>
           <h2 className="text-4xl md:text-5xl font-bold text-neutral-800 dark:text-white mb-4">
-            Got questions?
+            Got <span className="text-amber-600">questions</span>?
           </h2>
           <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto">
             Everything you need to know about our product and services
@@ -73,7 +75,7 @@ export const ModernFAQ = ({
               placeholder="Search questions..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-5 py-4 rounded-lg bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 text-neutral-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-neutral-500 dark:focus:ring-neutral-400 transition-all"
+              className="w-full px-5 py-4 rounded-lg bg-white dark:bg-neutral-800 border border-neutral-300 dark:border-neutral-700 text-neutral-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 transition-all"
             />
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +101,7 @@ export const ModernFAQ = ({
                 onClick={() => setFilter(null)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                   filter === null
-                    ? "bg-neutral-800 text-white dark:bg-white dark:text-neutral-900"
+                    ? "bg-amber-500 text-white dark:bg-amber-500 dark:text-white"
                     : "bg-neutral-300 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 hover:bg-neutral-400 dark:hover:bg-neutral-700"
                 }`}
               >
@@ -111,7 +113,7 @@ export const ModernFAQ = ({
                   onClick={() => setFilter(category)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     filter === category
-                      ? "bg-neutral-800 text-white dark:bg-white dark:text-neutral-900"
+                      ? "bg-amber-500 text-white dark:bg-amber-500 dark:text-white"
                       : "bg-neutral-300 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 hover:bg-neutral-400 dark:hover:bg-neutral-700"
                   }`}
                 >
@@ -137,21 +139,34 @@ export const ModernFAQ = ({
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className="bg-white dark:bg-neutral-800 rounded-xl shadow-md overflow-hidden"
+                  className="bg-white dark:bg-neutral-800 rounded-xl shadow-md overflow-hidden relative group"
                 >
+                  {/* Orange accent line that appears on hover or when active */}
+                  <div 
+                    className={`absolute left-0 h-full w-1 transition-opacity duration-300 ${
+                      activeItem === actualIndex 
+                        ? "bg-amber-500 opacity-100" 
+                        : "bg-amber-500 opacity-0 group-hover:opacity-50"
+                    }`}
+                  ></div>
+                  
                   <button
                     onClick={() => handleToggle(actualIndex)}
                     className="w-full flex items-center justify-between p-6 text-left border-b border-transparent"
                     aria-expanded={activeItem === actualIndex}
                   >
-                    <h3 className="text-lg font-semibold text-neutral-800 dark:text-white pr-8">
+                    <h3 className={`text-lg font-semibold pr-8 transition-colors duration-300 ${
+                      activeItem === actualIndex
+                        ? "text-amber-600 dark:text-amber-400"
+                        : "text-neutral-800 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400"
+                    }`}>
                       {item.question}
                     </h3>
                     <div
                       className={`flex-shrink-0 rounded-full w-8 h-8 flex items-center justify-center transition-colors ${
                         activeItem === actualIndex
-                          ? "bg-neutral-800 dark:bg-white"
-                          : "bg-neutral-100 dark:bg-neutral-700"
+                          ? "bg-amber-500 dark:bg-amber-500"
+                          : "bg-neutral-100 dark:bg-neutral-700 group-hover:bg-amber-100 dark:group-hover:bg-amber-900/30"
                       }`}
                     >
                       <svg
@@ -166,7 +181,7 @@ export const ModernFAQ = ({
                         strokeLinejoin="round"
                         className={`transition-transform ${
                           activeItem === actualIndex
-                            ? "rotate-45 text-white dark:text-neutral-900"
+                            ? "rotate-45 text-white dark:text-white"
                             : "text-neutral-600 dark:text-neutral-300"
                         }`}
                       >
@@ -207,7 +222,7 @@ export const ModernFAQ = ({
                 strokeWidth="1.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="mx-auto mb-4 text-neutral-400 dark:text-neutral-500"
+                className="mx-auto mb-4 text-amber-400 dark:text-amber-500"
               >
                 <circle cx="11" cy="11" r="8"></circle>
                 <path d="m21 21-4.3-4.3"></path>
@@ -231,12 +246,17 @@ export const ModernFAQ = ({
           className="mt-16 rounded-2xl overflow-hidden relative"
         >
           <div className="p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 z-30 relative">
-            <div className="absolute inset-0 w-full h-full overflow-hidden -z-20">
-              <img src="/texture1.jpg" alt="texture" className="object-cover" />
+            <div className="absolute inset-0 w-full h-full overflow-hidden -z-20 bg-gradient-to-r from-neutral-900 to-neutral-800">
+              {/* Orange accents in the background */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500 rounded-full filter blur-3xl opacity-10 -translate-y-1/2 translate-x-1/2"></div>
+              <div className="absolute bottom-0 left-0 w-40 h-40 bg-amber-500 rounded-full filter blur-2xl opacity-10 translate-y-1/2 -translate-x-1/2"></div>
+              {/* Original image with reduced opacity */}
+              <img src="/texture1.jpg" alt="texture" className="object-cover mix-blend-overlay opacity-30" />
             </div>
             <div>
+              <div className="h-1 w-12 bg-amber-500 rounded-full mb-4"></div>
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
-                Still have questions?
+                Still have <span className="text-amber-400">questions</span>?
               </h3>
               <p className="text-neutral-300 max-w-lg">
                 Can&apos;t find the answer you&apos;re looking for? Please contact our
@@ -246,7 +266,7 @@ export const ModernFAQ = ({
             <div className="flex-shrink-0">
               <a
                 href="/contact"
-                className="inline-flex items-center px-8 py-4 rounded-lg bg-white dark:bg-neutral-900 text-neutral-800 dark:text-white font-semibold hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+                className="inline-flex items-center px-8 py-4 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-semibold transition-colors"
               >
                 Contact Support
                 <svg
@@ -259,7 +279,7 @@ export const ModernFAQ = ({
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="ml-2"
+                  className="ml-2 group-hover:translate-x-1 transition-transform"
                 >
                   <path d="M5 12h14"></path>
                   <path d="m12 5 7 7-7 7"></path>

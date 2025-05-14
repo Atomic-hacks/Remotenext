@@ -11,6 +11,7 @@ const Navbar = () => {
   const [width, setWidth] = useState("100%");
   const [navOpen, setNavOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeLink, setActiveLink] = useState("Home");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -78,7 +79,7 @@ const Navbar = () => {
         {/* Logo */}
         <motion.div className="flex items-center gap-2 flex-shrink-0" whileHover={{ scale: 1.05 }}>
           <img src='/logo.jpg' alt="RemoteNext" className="h-8 sm:h-10" />
-          <p className="sm:text-[28px] text-xl text-transparent bg-clip-text bg-gradient-to-tr from-black via-neutral-500 to-black">RemoteNext</p>
+          <p className="sm:text-[28px] text-xl text-transparent bg-clip-text bg-gradient-to-tr from-black via-amber-500 to-black">RemoteNext</p>
         </motion.div>
 
         {/* Desktop Navigation - added flex-shrink-0 to prevent shrinking */}
@@ -88,8 +89,11 @@ const Navbar = () => {
               <motion.a
                 key={index}
                 href={link.link}
-                className="text-black rounded-full hover:border hover:border-neutral-700 hover:bg-neutral-100 px-1 py-1 font-normal transition-all duration-300 whitespace-nowrap"
+                className={`text-black rounded-full hover:border hover:border-amber-400 hover:bg-amber-50 px-1 py-1 font-normal transition-all duration-300 whitespace-nowrap ${
+                  activeLink === link.name ? "border border-amber-400 bg-amber-50 text-amber-700" : ""
+                }`}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => setActiveLink(link.name)}
               >
                 {link.name}
               </motion.a>
@@ -102,14 +106,14 @@ const Navbar = () => {
             whileTap={{ scale: 0.95 }}
             className="flex-shrink-0"
           >
-            <MagicButton title="Get In Touch" icon={<ArrowRight />} position="right" buttonClasses="!w-full" />
+            <MagicButton title="Get In Touch" icon={<ArrowRight />} position="right" buttonClasses="!w-full !bg-amber-500 hover:!bg-amber-600" />
           </motion.a>
         </div>
 
         {/* Mobile Menu Button */}
         <motion.button
           onClick={() => setNavOpen(!navOpen)}
-          className="lg:hidden p-2 text-black hover:bg-black/10 rounded-full transition-colors flex-shrink-0"
+          className="lg:hidden p-2 text-amber-500 hover:bg-amber-100 rounded-full transition-colors flex-shrink-0"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
@@ -125,13 +129,13 @@ const Navbar = () => {
             animate="visible"
             exit="hidden"
             variants={mobileMenuVariants}
-            className="md:hidden fixed inset-y-0 right-0 w-full sm:w-[350px] opacity-80 backdrop-blur-2xl p-6 shadow-xl"
+            className="md:hidden fixed inset-y-0 right-0 w-full sm:w-[350px] bg-gradient-to-br from-neutral-900 to-neutral-800 opacity-95 backdrop-blur-2xl p-6 shadow-xl"
           >
             <div className="flex flex-col h-full">
               <div className="flex justify-end">
                 <motion.button
                   onClick={() => setNavOpen(false)}
-                  className="p-2 text-white hover:bg-white/10 rounded-full transition-colors"
+                  className="p-2 text-amber-400 hover:bg-amber-500/20 rounded-full transition-colors"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                 >
@@ -144,9 +148,14 @@ const Navbar = () => {
                   <motion.a
                     key={index}
                     href={link.link}
-                    className="text-white/90 hover:text-white px-4 py-2 text-lg font-medium transition-colors"
-                    whileHover={{ x: 10 }}
-                    onClick={() => setNavOpen(false)}
+                    className={`text-white/90 hover:text-amber-400 px-4 py-2 text-lg font-medium transition-colors border-l-4 ${
+                      activeLink === link.name ? "border-l-amber-500 text-amber-400 bg-amber-500/10" : "border-l-transparent"
+                    }`}
+                    whileHover={{ x: 10, backgroundColor: "rgba(245, 158, 11, 0.05)" }}
+                    onClick={() => {
+                      setActiveLink(link.name);
+                      setNavOpen(false);
+                    }}
                   >
                     {link.name}
                   </motion.a>
@@ -160,8 +169,13 @@ const Navbar = () => {
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setNavOpen(false)}
                 >
-                  <MagicButton title="Get started" icon={<ArrowRight />} position="right" buttonClasses="!w-full" />
+                  <MagicButton title="Get In Touch" icon={<ArrowRight />} position="right" buttonClasses="!w-full !bg-amber-500 hover:!bg-amber-600" />
                 </motion.a>
+                
+                {/* Added subtle design element */}
+                <div className="flex justify-center mt-6">
+                  <div className="w-16 h-1 bg-amber-500/30 rounded-full"></div>
+                </div>
               </div>
             </div>
           </motion.div>

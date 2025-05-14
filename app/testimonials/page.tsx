@@ -9,8 +9,8 @@ import { TESTIMONIALS } from "@/lib/constants";
 import { Testimonial } from "@/types";
 
 export const metadata: Metadata = {
-  title: "Testimonials | RemoteAIJobs",
-  description: "See what our users say about RemoteAIJobs - success stories and experiences",
+  title: "Testimonials | remotenext",
+  description: "See what our users say about remotenext - success stories and experiences",
 };
 
 // Additional testimonials for the testimonials page
@@ -29,7 +29,7 @@ const EXTENDED_TESTIMONIALS: Testimonial[] = [
     name: "Lisa Thompson",
     position: "Machine Learning Specialist",
     company: "AlgoLearn",
-    quote: "After struggling to find specialized remote work in my field, RemoteAIJobs connected me with multiple opportunities. Now I have a job that allows me flexibility while working on cutting-edge AI projects.",
+    quote: "After struggling to find specialized remote work in my field, remotenext connected me with multiple opportunities. Now I have a job that allows me flexibility while working on cutting-edge AI projects.",
     image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
   },
   {
@@ -53,7 +53,7 @@ const EXTENDED_TESTIMONIALS: Testimonial[] = [
     name: "James Wilson",
     position: "AI Trainer",
     company: "CogniLearn",
-    quote: "RemoteAIJobs gave me access to opportunities I wouldn't have found elsewhere. The premium services were well worth the investment and helped me land my dream job.",
+    quote: "remotenext gave me access to opportunities I wouldn't have found elsewhere. The premium services were well worth the investment and helped me land my dream job.",
     image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
   },
   {
@@ -84,7 +84,7 @@ const SUCCESS_STORIES: SuccessStory[] = [
     position: "Data Labeling Specialist",
     company: "DataPro",
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80",
-    story: "After losing my in-office job during the pandemic, I was struggling to find remote work that utilized my skills in data organization and classification. I discovered RemoteAIJobs through a colleague and applied to several data labeling positions.",
+    story: "After losing my in-office job during the pandemic, I was struggling to find remote work that utilized my skills in data organization and classification. I discovered remotenext through a colleague and applied to several data labeling positions.",
     results: "Within just two weeks, I received multiple offers and was able to choose a position that offered 30% higher pay than my previous job, with the flexibility to work from anywhere. The detailed job descriptions helped me find exactly what I was looking for."
   },
   {
@@ -93,7 +93,7 @@ const SUCCESS_STORIES: SuccessStory[] = [
     position: "AI Trainer",
     company: "TechInnovate",
     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80",
-    story: "With a background in linguistics and natural language processing, I wanted to work on cutting-edge AI projects while having the flexibility to travel. I signed up for RemoteAIJobs' premium membership to access exclusive opportunities.",
+    story: "With a background in linguistics and natural language processing, I wanted to work on cutting-edge AI projects while having the flexibility to travel. I signed up for remotenext' premium membership to access exclusive opportunities.",
     results: "The platform's specialized focus on AI roles connected me with a position training conversational AI models at a leading tech company. I've been able to advance my career while working from three different countries in the past year."
   },
   {
@@ -102,7 +102,7 @@ const SUCCESS_STORIES: SuccessStory[] = [
     position: "Content Moderator",
     company: "SafeSpace",
     image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80",
-    story: "As a parent of two young children, I needed flexible work that would accommodate my family responsibilities. Traditional jobs weren't offering the work-life balance I needed, so I turned to RemoteAIJobs to find remote content moderation opportunities.",
+    story: "As a parent of two young children, I needed flexible work that would accommodate my family responsibilities. Traditional jobs weren't offering the work-life balance I needed, so I turned to remotenext to find remote content moderation opportunities.",
     results: "I found a part-time position that allowed me to set my own hours while earning a competitive wage. The job has since evolved into a full-time role with leadership responsibilities, all while maintaining the flexibility I need for my family."
   }
 ];

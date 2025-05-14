@@ -6,58 +6,58 @@ import { ModernFAQ } from "../ui/faq-style";
 export default function FAQPage() {
   const faqItems = [
     {
-      question: "What makes your product different from competitors?",
-      answer: "Our product stands out through three key differentiators:\n\n1. Advanced AI technology that delivers 99.8% accuracy compared to the industry standard of 95%\n\n2. Intuitive user interface designed with extensive user research and testing\n\n3. Enterprise-grade security with SOC 2 Type II and GDPR compliance built-in from day one",
-      category: "Product"
+      question: "How does your AI-powered hiring platform improve the recruitment process?",
+      answer: "Our platform revolutionizes remote hiring through three key innovations:\n\n1. Advanced AI matching technology that delivers 95% better candidate-job fit compared to traditional methods\n\n2. Automated screening that reduces time-to-hire by 71% while eliminating unconscious bias\n\n3. Remote-first assessment tools designed to evaluate both technical skills and cultural fit in a distributed work environment",
+      category: "Platform"
     },
     {
-      question: "How secure is my data on your platform?",
-      answer: "Security is our top priority. We implement end-to-end encryption, regular security audits, and comply with all major security standards including SOC 2 Type II, GDPR, HIPAA, and ISO 27001. All data is stored in redundant, geographically distributed data centers with 24/7 monitoring and automatic threat detection systems.",
+      question: "How secure is candidate data on your platform?",
+      answer: "We take candidate privacy and data security seriously. Our platform features end-to-end encryption, anonymized candidate profiles for unbiased initial screening, and compliance with global standards including SOC 2 Type II, GDPR, and local employment laws. Candidate data is only shared with employers when explicitly authorized by the candidate.",
       category: "Security"
     },
     {
-      question: "Can I integrate your solution with my existing tools?",
-      answer: "Absolutely. Our platform offers robust API access and native integrations with over 200 popular business tools including Salesforce, HubSpot, Slack, Microsoft 365, Google Workspace, Jira, Asana, and many more. Our dedicated integration team can also develop custom connectors for enterprise clients with specific needs.",
+      question: "Can I integrate your platform with my existing HR and ATS tools?",
+      answer: "Absolutely. Our platform seamlessly integrates with popular ATS and HR systems including Workday, BambooHR, Greenhouse, Lever, SAP SuccessFactors, and over 50 other workforce tools. We also provide API access for custom integrations and can develop tailored connectors for enterprise clients with specific requirements.",
       category: "Integration"
     },
     {
-      question: "What pricing plans do you offer?",
-      answer: "We offer flexible pricing to accommodate businesses of all sizes:\n\n• Starter: $29/month for individuals and small teams\n• Professional: $99/month for growing businesses\n• Enterprise: Custom pricing for large organizations with advanced needs\n\nAll plans include core features with scaling capabilities, and we offer a 30-day free trial with no credit card required.",
+      question: "What pricing plans do you offer for employers?",
+      answer: "We offer flexible pricing to accommodate companies of all sizes:\n\n• Startup: $199/month for up to 5 active job postings\n• Growth: $499/month for up to 15 active job postings\n• Enterprise: Custom pricing for unlimited job postings and advanced features\n\nAll plans include core AI matching and screening capabilities, with premium features available at higher tiers. We offer a 14-day free trial for new clients.",
       category: "Pricing"
     },
     {
-      question: "How quickly can we implement your solution?",
-      answer: "Most customers complete implementation within 2-4 weeks, depending on the complexity of your requirements. Our Professional and Enterprise plans include dedicated onboarding specialists who will guide you through the entire process. We also provide comprehensive documentation, video tutorials, and regular training webinars to accelerate adoption across your organization.",
+      question: "How quickly can we implement your remote hiring solution?",
+      answer: "Most companies are up and running within 1-2 weeks. Initial platform setup takes just 24-48 hours, followed by AI calibration based on your company culture and role requirements. Our Growth and Enterprise plans include dedicated implementation specialists who will configure custom assessment workflows and help you optimize job descriptions for better AI matching results.",
       category: "Implementation"
     },
     {
-      question: "Do you offer customer support?",
-      answer: "Yes, all plans include customer support. The level of support varies by plan:\n\n• Starter: Email support with 24-hour response time and access to our knowledge base\n• Professional: Email and chat support with 4-hour response time, plus phone support during business hours\n• Enterprise: 24/7 priority support via email, chat, and phone with a dedicated customer success manager",
+      question: "What kind of support do you provide during the hiring process?",
+      answer: "We offer multi-tiered support based on your plan:\n\n• Startup: Email support with 24-hour response time and access to our recruiter knowledge base\n• Growth: Email and chat support with 4-hour response time, plus scheduled strategy calls\n• Enterprise: 24/7 priority support with a dedicated customer success manager and regular optimization consultations\n\nAll clients receive access to our hiring webinars and best practices community.",
       category: "Support"
     },
     {
-      question: "Can I cancel my subscription at any time?",
-      answer: "Yes, you can cancel your subscription at any time with no cancellation fees. Monthly plans can be canceled before the next billing cycle. Annual plans can be canceled for future renewal but are not eligible for partial refunds unless specified in your enterprise agreement.",
+      question: "Is there a long-term contract or can I use the platform as needed?",
+      answer: "We offer both monthly and annual subscription options with no long-term commitment required. Monthly plans can be canceled anytime before the next billing cycle. Annual plans provide a 20% discount and can be canceled for future renewal. For seasonal hiring needs, we also offer flexible credit packages that don't expire for 12 months.",
       category: "Pricing"
     },
     {
-      question: "What happens to my data if I cancel?",
-      answer: "Upon cancellation, you'll have 30 days to export your data in standard formats. After this period, your data will be scheduled for deletion from our active systems. Backups containing your data will be purged according to our regular backup rotation policy, typically within 90 days of deletion from active systems. Enterprise customers may negotiate custom data retention policies.",
+      question: "What happens to candidate data after a hiring cycle ends?",
+      answer: "Candidate data management follows strict privacy protocols. Active candidates remain in your talent pool for future matching unless they request removal. You can maintain a private talent pool for 12 months after positions are filled. All candidate data is automatically anonymized after 18 months if no hiring activity occurs, and candidates can request complete data deletion at any time.",
       category: "Security"
     },
     {
-      question: "Do you offer custom development for specific requirements?",
-      answer: "Yes, we offer custom development services for Enterprise customers with specific needs. Our professional services team will work with you to understand your requirements, create a detailed implementation plan, and develop custom solutions that integrate seamlessly with our core platform. Custom projects typically start at $10,000 depending on scope and complexity.",
+      question: "Do you offer custom assessment workflows for specialized roles?",
+      answer: "Yes, we specialize in creating role-specific remote assessment workflows. Our platform includes over 200 pre-configured technical assessments and behavioral evaluations. Enterprise clients receive custom assessment design services from our I/O psychology team who can develop specialized evaluations for unique roles, including simulated work environments, asynchronous video interviews, and role-specific challenges.",
       category: "Implementation"
     },
     {
-      question: "How do you handle updates and new features?",
-      answer: "We follow a continuous improvement model with regular updates:\n\n• Minor updates and bug fixes: Weekly release cycle with no service disruption\n• Feature enhancements: Monthly releases with advance notification\n• Major platform updates: Quarterly releases with detailed changelogs, webinar demonstrations, and optional beta testing program\n\nAll updates are included in your subscription at no additional cost.",
-      category: "Product"
+      question: "How does your platform stay current with remote hiring trends and AI advancement?",
+      answer: "We continuously improve our platform through:\n\n• Bi-weekly algorithm updates to enhance matching accuracy\n• Monthly feature releases based on client feedback and hiring metrics\n• Quarterly major updates including new assessment types and candidate engagement tools\n\nOur AI models are regularly retrained on the latest successful hiring outcomes while maintaining strict data privacy standards. All updates are automatically deployed with zero downtime.",
+      category: "Platform"
     }
   ];
 
-  const categories = ["Product", "Security", "Integration", "Pricing", "Implementation", "Support"];
+  const categories = ["Platform", "Security", "Integration", "Pricing", "Implementation", "Support"];
 
   return (
     <div className="min-h-screen bg-neutral-100 dark:bg-neutral-950">

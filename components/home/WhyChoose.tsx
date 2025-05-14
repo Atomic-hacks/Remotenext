@@ -2,13 +2,11 @@
 
 'use client';
 
-import React, { useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Users, BarChart3, Database, Key, Server } from 'lucide-react';
 
 export default function WhyChooseRemoteNext() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
   const features = [
     {
       icon: <BarChart3 className="w-6 h-6" />,
@@ -80,10 +78,7 @@ export default function WhyChooseRemoteNext() {
   };
 
   return (
-    <div 
-      ref={sectionRef}
-      className="bg-gradient-to-b from-white to-neutral-50 py-16 md:py-24 px-4 sm:px-6 lg:px-8 w-full max-w-7xl mx-auto rounded-xl overflow-hidden"
-    >
+    <div className="bg-gradient-to-b from-white to-neutral-50 py-16 md:py-24 px-4 sm:px-6 lg:px-8 w-full max-w-7xl mx-auto rounded-xl overflow-hidden">
       <motion.div 
         className="text-center mb-12 md:mb-20"
         initial="hidden"
@@ -91,11 +86,14 @@ export default function WhyChooseRemoteNext() {
         viewport={{ once: true, margin: "-100px" }}
         variants={containerVariants}
       >
+        {/* Orange accent line */}
+        <div className="h-1 w-16 bg-amber-500 rounded-full mx-auto mb-6"></div>
+        
         <motion.h2
           variants={headerVariants}
           className="text-3xl md:text-5xl font-bold tracking-tight text-neutral-800"
         >
-          Why Choose RemoteNext?
+          Why Choose <span className="text-amber-600">RemoteNext</span>?
         </motion.h2>
         <motion.p
           variants={headerVariants}
@@ -140,46 +138,33 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ feature, index, variants }) =
     <motion.div
       variants={variants}
       custom={index}
-      className="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-neutral-100 hover:shadow-md transition-shadow duration-300"
+      className="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-neutral-100 hover:shadow-md transition-all duration-300 group relative"
       whileHover={{ 
         y: -8,
         boxShadow: "0 20px 30px rgba(0, 0, 0, 0.07)",
         transition: { duration: 0.3 }
       }}
     >
+      {/* Orange accent line on hover */}
+      <div className="absolute bottom-0 left-0 h-1 bg-amber-500 w-0 group-hover:w-full transition-all duration-500"></div>
+      
       <div className="flex items-start mb-5">
-        <motion.div 
-          className="flex-shrink-0 bg-neutral-800 rounded-lg p-3 text-white"
-          whileHover={{ 
-            scale: 1.05,
-            backgroundColor: "#111111",
-            transition: { duration: 0.2 }
-          }}
-        >
+        <div className="flex-shrink-0 bg-neutral-800 group-hover:bg-amber-500 rounded-lg p-3 text-white transition-colors duration-300">
           {feature.icon}
-        </motion.div>
+        </div>
         <h3 className="ml-4 text-lg font-semibold text-neutral-800 pt-1">{feature.title}</h3>
       </div>
       
       <p className="text-neutral-600 leading-relaxed pl-1">{feature.description}</p>
       
-      <motion.div 
-        className="mt-6 pl-1"
-        initial={{ opacity: 0.8 }}
-        whileHover={{ opacity: 1 }}
-      >
-        <button className="text-sm font-medium text-neutral-700 hover:text-neutral-900 flex items-center gap-1.5 group">
+      <div className="mt-6 pl-1">
+        <button className="text-sm font-medium text-neutral-700 group-hover:text-amber-600 flex items-center gap-1.5 transition-colors duration-300">
           Learn more 
-          <motion.span
-            initial={{ x: 0 }}
-            whileHover={{ x: 4 }}
-            transition={{ duration: 0.2 }}
-            className="inline-block"
-          >
+          <span className="inline-block group-hover:translate-x-1 transition-transform duration-300">
             →
-          </motion.span>
+          </span>
         </button>
-      </motion.div>
+      </div>
     </motion.div>
   );
 };

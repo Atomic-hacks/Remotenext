@@ -18,7 +18,23 @@ export const AnimatedTestimonials = ({
   testimonials: Testimonial[];
   autoplay?: boolean;
 }) => {
+  // Use useState with a lazy initializer to ensure this only runs on client
   const [active, setActive] = useState(0);
+  
+  // Store rotation values in a ref to keep them consistent across renders
+  const [rotationValues, setRotationValues] = useState<number[]>([]);
+  
+  // Client-side only flag
+  const [isClient, setIsClient] = useState(false);
+
+  // Initialize rotation values once on client-side only
+  useEffect(() => {
+    setIsClient(true);
+    
+    // Generate and store stable rotation values for each testimonial
+    const rotations = testimonials.map(() => Math.floor(Math.random() * 15) - 7);
+    setRotationValues(rotations);
+  }, [testimonials.length]);
 
   const handleNext = () => {
     setActive((prev) => (prev + 1) % testimonials.length);
@@ -32,41 +48,88 @@ export const AnimatedTestimonials = ({
     return index === active;
   };
 
+  // Setup autoplay only on client side
   useEffect(() => {
-    if (autoplay) {
-      const interval = setInterval(handleNext, 5000);
-      return () => clearInterval(interval);
-    }
-  }, [autoplay]);
+    if (!isClient || !autoplay) return;
+    
+    const interval = setInterval(handleNext, 5000);
+    return () => clearInterval(interval);
+  }, [autoplay, isClient]);
 
-  // Generate random rotation values for non-active cards
-  const randomRotateY = () => {
-    return Math.floor(Math.random() * 15) - 7;
+  // Get rotation for a specific card
+  const getRotation = (index: number) => {
+    // Before client-side initialization, return 0 to prevent hydration mismatch
+    if (!isClient || rotationValues.length === 0) return 0;
+    return rotationValues[index] || 0;
   };
+
+  // Only render the full component on the client
+  if (!isClient) {
+    // Simple placeholder to prevent hydration mismatch
+    return (
+      <div className="rounded-2xl bg-neutral-300 mx-auto w-full px-4 py-16 md:py-24 font-sans antialiased min-h-[600px]">
+        <div className="text-center mb-10">
+          <div className="h-1 w-16 bg-amber-500 rounded-full mx-auto mb-6"></div>
+          <h1 className="text-3xl md:text-5xl font-bold">
+            What our <span className="text-amber-600">Clients</span> Say
+          </h1>
+        </div>
+        <div className="relative grid grid-cols-1 gap-10 md:gap-16 lg:gap-20 md:grid-cols-2 items-center">
+          {/* Placeholder structures while client-side JS loads */}
+          <div className="h-96 md:h-[28rem] w-full relative">
+            <div className="absolute inset-0 bg-neutral-200 rounded-3xl"></div>
+          </div>
+          <div className="flex flex-col justify-between py-4 md:py-8">
+            <div className="space-y-6 animate-pulse">
+              <div className="h-6 w-48 bg-neutral-200 rounded"></div>
+              <div className="h-4 w-32 bg-neutral-200 rounded"></div>
+              <div className="h-1 w-12 bg-amber-500 rounded-full"></div>
+              <div className="space-y-3">
+                <div className="h-4 w-full bg-neutral-200 rounded"></div>
+                <div className="h-4 w-full bg-neutral-200 rounded"></div>
+                <div className="h-4 w-3/4 bg-neutral-200 rounded"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="rounded-2xl bg-neutral-300 mx-auto w-full px-4 py-16 md:py-24 font-sans antialiased">
-        <h1 className="text-3xl text-center md:text-5xl mb-10">What our Clients Say</h1>
+      <div className="text-center mb-10">
+        {/* Orange accent line */}
+        <div className="h-1 w-16 bg-amber-500 rounded-full mx-auto mb-6"></div>
+        <h1 className="text-3xl md:text-5xl font-bold">
+          What our <span className="text-amber-600">Clients</span> Say
+        </h1>
+      </div>
+      
       <div className="relative grid grid-cols-1 gap-10 md:gap-16 lg:gap-20 md:grid-cols-2 items-center">
         {/* Image Section */}
         <div className="relative h-96 md:h-[28rem] w-full overflow-visible">
           <div className="absolute inset-0 bg-gradient-to-br from-neutral-100/30 to-neutral-50/30 dark:from-neutral-900/30 dark:to-neutral-800/30 rounded-3xl -z-10 blur-xl opacity-80"></div>
           
+          {/* Orange accent sparkle */}
+          <div className="absolute -top-4 -right-4 h-16 w-16 bg-amber-500 rounded-full opacity-20 blur-xl"></div>
+          <div className="absolute -bottom-4 -left-4 h-12 w-12 bg-amber-500 rounded-full opacity-30 blur-lg"></div>
+          
           <AnimatePresence mode="wait">
             {testimonials.map((testimonial, index) => (
               <motion.div
-                key={testimonial.src}
+                key={`${testimonial.src}-${index}`}
                 initial={{
                   opacity: 0,
                   scale: 0.92,
                   z: -100,
-                  rotate: randomRotateY(),
+                  rotate: getRotation(index),
                 }}
                 animate={{
                   opacity: isActive(index) ? 1 : 0.65,
                   scale: isActive(index) ? 1 : 0.94,
                   z: isActive(index) ? 0 : -100,
-                  rotate: isActive(index) ? 0 : randomRotateY(),
+                  rotate: isActive(index) ? 0 : getRotation(index),
                   zIndex: isActive(index)
                     ? 40
                     : testimonials.length + 2 - index,
@@ -76,7 +139,7 @@ export const AnimatedTestimonials = ({
                   opacity: 0,
                   scale: 0.88,
                   z: -100,
-                  rotate: randomRotateY(),
+                  rotate: getRotation(index),
                 }}
                 transition={{
                   duration: 0.5,
@@ -86,6 +149,10 @@ export const AnimatedTestimonials = ({
               >
                 <div className="relative h-full w-full rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"></div>
+                  {/* Orange accent overlay on active */}
+                  {isActive(index) && (
+                    <div className="absolute inset-x-0 bottom-0 h-1 bg-amber-500"></div>
+                  )}
                   <img
                     src={testimonial.src}
                     alt={testimonial.name}
@@ -126,8 +193,8 @@ export const AnimatedTestimonials = ({
                 <div 
                   className={`h-2 w-8 rounded-full transition-all duration-300 ${
                     isActive(index)
-                      ? "bg-neutral-800 dark:bg-white"
-                      : "bg-neutral-300 dark:bg-neutral-700"
+                      ? "bg-amber-500"
+                      : "bg-neutral-400 hover:bg-neutral-500 dark:bg-neutral-700"
                   }`}
                 ></div>
               </button>
@@ -165,10 +232,12 @@ export const AnimatedTestimonials = ({
                 <p className="text-sm md:text-base text-neutral-500 dark:text-neutral-400 mt-1">
                   {testimonials[active].designation}
                 </p>
+                {/* Accent line */}
+                <div className="h-1 w-12 bg-amber-500 rounded-full mt-3"></div>
               </div>
               
               <div className="relative">
-                <div className="absolute -left-4 -top-2 text-5xl font-serif text-neutral-300 dark:text-neutral-700">&ldquo;</div>
+                <div className="absolute -left-4 -top-2 text-5xl font-serif text-amber-500 opacity-30">&ldquo;</div>
                 <motion.p className="relative mt-6 text-lg md:text-xl text-neutral-600 dark:text-neutral-300 leading-relaxed">
                   {testimonials[active].quote.split(" ").map((word, index) => (
                     <motion.span
@@ -201,17 +270,17 @@ export const AnimatedTestimonials = ({
           <div className="flex items-center gap-4 pt-12 md:pt-6">
             <button
               onClick={handlePrev}
-              className="group flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 transition-colors duration-300"
+              className="group flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 hover:bg-amber-500 dark:bg-neutral-800 dark:hover:bg-amber-600 transition-colors duration-300"
               aria-label="Previous testimonial"
             >
-              <IconArrowLeft className="h-5 w-5 text-neutral-700 transition-transform duration-300 group-hover:-translate-x-0.5 dark:text-neutral-300" />
+              <IconArrowLeft className="h-5 w-5 text-neutral-700 group-hover:text-white transition-all duration-300 group-hover:-translate-x-0.5 dark:text-neutral-300" />
             </button>
             <button
               onClick={handleNext}
-              className="group flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 transition-colors duration-300"
+              className="group flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 hover:bg-amber-500 dark:bg-neutral-800 dark:hover:bg-amber-600 transition-colors duration-300"
               aria-label="Next testimonial"
             >
-              <IconArrowRight className="h-5 w-5 text-neutral-700 transition-transform duration-300 group-hover:translate-x-0.5 dark:text-neutral-300" />
+              <IconArrowRight className="h-5 w-5 text-neutral-700 group-hover:text-white transition-all duration-300 group-hover:translate-x-0.5 dark:text-neutral-300" />
             </button>
           </div>
         </div>
