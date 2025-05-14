@@ -101,7 +101,7 @@ const Page = () => {
       } else {
         setSubmitStatus("error");
       }
-    } catch (_) {
+    } catch {
       // Changed variable name to _err and using underscore prefix to indicate it's unused
       setSubmitStatus("error");
     } finally {
