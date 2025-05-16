@@ -591,13 +591,13 @@ const JobListingPage = () => {
               variants={titleVariants}
               className="text-3xl font-bold text-neutral-200 mb-6"
             >
-              Can't Find What You're Looking For?
+              Can&apos;t Find What You&apos;re Looking For?
             </motion.h2>
             <motion.p 
               variants={titleVariants}
               className="text-lg text-neutral-400 mb-8"
             >
-              Create a job alert and we'll notify you when new opportunities matching your criteria become available.
+              Create a job alert and we&apos;ll notify you when new opportunities matching your criteria become available.
             </motion.p>
             <motion.div 
               className="flex flex-col sm:flex-row gap-4 justify-center"
