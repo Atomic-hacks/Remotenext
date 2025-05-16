@@ -68,11 +68,20 @@ const Hero: React.FC<HeroProps> = ({ videoSrc = "/remote1.mp4" }) => {
         </div>
       </div>
 
-      {/* Overlay with subtle orange-yellow gradient */}
+      {/* Improved overlay with more subtle gradient */}
       <div
-        className="absolute inset-0 bg-gradient-to-tr from-black/40 via-black/30 to-amber-500/10 z-10"
+        className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-black/60 z-10"
         style={{
           transform: `translateY(${parallaxOffset * 0.2}px)`, // Slower parallax for overlay
+          transition: "transform 0.1s ease-out",
+        }}
+      ></div>
+      
+      {/* Gold accent overlay */}
+      <div 
+        className="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-amber-600/10 z-10"
+        style={{
+          transform: `translateY(${parallaxOffset * 0.15}px)`,
           transition: "transform 0.1s ease-out",
         }}
       ></div>
@@ -89,10 +98,10 @@ const Hero: React.FC<HeroProps> = ({ videoSrc = "/remote1.mp4" }) => {
           <h1 className="text-4xl md:text-5xl font-semibold mb-4">
             Welcome to{" "}
             <span 
-              className={`transition-all duration-300 text-transparent bg-clip-text bg-gradient-to-r ${
+              className={`transition-all duration-600 text-transparent bg-clip-text ${
                 isHovered 
-                  ? 'from-amber-400 via-amber-500 to-amber-400 scale-105' 
-                  : 'from-neutral-900 via-amber-500 to-neutral-900'
+                  ? 'bg-gradient-to-r from-neutral-600 via-amber-400 to-amber-300' 
+                  : 'bg-gradient-to-r from-neutral-300 via-amber-600 to-neutral-300'
               }`}
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
@@ -100,34 +109,34 @@ const Hero: React.FC<HeroProps> = ({ videoSrc = "/remote1.mp4" }) => {
               RemoteNext
             </span>
           </h1>
-          <p className="text-neutral-300 text-md md:text-xl mb-8 max-w-2xl mx-auto">
+          <p className="text-neutral-200 text-md md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed">
             Your Gateway to Global Remote Jobs <br />
             At RemoteNext, we equip you with the skills and support you need to
             land remote roles in 
-            <span className="text-amber-400 font-medium"> AI</span>, 
-            <span className="text-amber-400 font-medium"> Data Entry</span>, and more — wherever you are in
+            <span className="text-amber-500 font-medium"> AI</span>, 
+            <span className="text-amber-500 font-medium"> Data Entry</span>, and more — wherever you are in
             the world.
           </p>
           
           <div className="relative inline-block group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-amber-500 to-amber-300 rounded-lg blur opacity-25 group-hover:opacity-70 transition duration-300"></div>
+            <div className="absolute -inset-1 bg-gradient-to-r from-amber-500 to-amber-400 rounded-lg blur opacity-20 group-hover:opacity-50 transition duration-300"></div>
             <MagicButton
               title="Get started"
-              icon={<ArrowRight className="group-hover:text-amber-400 transition-colors duration-300" />}
+              icon={<ArrowRight className="text-neutral-300 group-hover:text-amber-300 transition-colors duration-300" />}
               position="right"
-              buttonClasses="!w-[175px] bg-gradient-to-r hover:from-neutral-900 hover:to-neutral-800 group-hover:border-amber-400/50 transition-all duration-300"
+              buttonClasses="!w-[175px] bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 group-hover:border-amber-400/30 transition-all duration-300"
             />
           </div>
         </div>
       </div>
       
-      {/* Subtle animated accent elements */}
-      <div className="absolute bottom-8 left-8 w-12 h-12 rounded-full bg-gradient-to-tr from-amber-400/20 to-amber-300/10 blur-md animate-pulse hidden md:block"></div>
-      <div className="absolute top-12 right-12 w-8 h-8 rounded-full bg-gradient-to-bl from-amber-400/20 to-amber-300/10 blur-md animate-ping animate-duration-[3000ms] hidden md:block"></div>
+      {/* Subtle animated accent elements - refined */}
+      <div className="absolute bottom-8 left-8 w-12 h-12 rounded-full bg-gradient-to-tr from-amber-500/15 to-amber-400/5 blur-md animate-pulse hidden md:block"></div>
+      <div className="absolute top-12 right-12 w-8 h-8 rounded-full bg-gradient-to-bl from-amber-500/15 to-amber-400/5 blur-md animate-ping animate-duration-[3000ms] hidden md:block"></div>
       
-      {/* Adding a subtle glow effect when logo is hovered */}
+      {/* Adding a subtle glow effect when logo is hovered - refined */}
       {isHovered && (
-        <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-32 bg-amber-500/10 rounded-full blur-xl animate-pulse z-5"></div>
+        <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-32 bg-amber-400/5 rounded-full blur-xl animate-pulse z-5"></div>
       )}
     </section>
   );

@@ -31,7 +31,7 @@ const Navbar = () => {
   const links = [
     { name: "Home", link: "/" },
     { name: "About", link: "/about" },
-    { name: "Services", link: "/services" },
+    { name: "jobs", link: "/jobs" },
     { name: "Contact", link: "/contact" },
   ];
 
@@ -89,7 +89,7 @@ const Navbar = () => {
               <motion.a
                 key={index}
                 href={link.link}
-                className={`text-black rounded-full hover:border hover:border-amber-400 hover:bg-amber-50 px-1 py-1 font-normal transition-all duration-300 whitespace-nowrap ${
+                className={`text-black flex items-center justify-center text-center rounded-full hover:border hover:border-amber-400 px-2 py-1 font-normal transition-all duration-600 whitespace-nowrap ${
                   activeLink === link.name ? "border border-amber-400 bg-amber-50 text-amber-700" : ""
                 }`}
                 whileTap={{ scale: 0.95 }}
