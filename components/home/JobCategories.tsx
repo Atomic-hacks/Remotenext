@@ -1,108 +1,291 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { Briefcase, MapPin, Calendar, ArrowRight, DollarSign, BarChart, Star } from 'lucide-react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-// Define a sample job for preview
-const sampleJob = {
-  id: "1",
-  company: "TechGlobal",
-  companyLogo: "/api/placeholder/100/100",
-  title: "Senior UX Designer",
-  location: "Remote, Worldwide",
-  type: "Full-time",
-  postedDate: "2 days ago",
-  salary: "$90k-120k",
-  experience: "3-5 years",
-  description: "We're looking for an experienced UX Designer to join our growing product team to help create exceptional user experiences for our enterprise SaaS platform.",
-  skills: ["Figma", "Design Systems", "User Research", "Prototyping"],
-  category: "Design",
-  featured: true
+'use client';
+
+import React, { useRef } from 'react';
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { JOB_CATEGORIES } from "@/lib/constants";
+import { Briefcase, MapPin, Calendar, ArrowRight } from 'lucide-react';
+
+// Color accent theme
+const ACCENT_COLOR = {
+  light: "bg-amber-50",
+  medium: "bg-amber-100",
+  text: "text-amber-600",
+  hover: "hover:text-amber-600",
+  border: "border-amber-200",
+  hoverBg: "hover:bg-amber-50",
+  button: "bg-amber-500",
+  buttonHover: "hover:bg-amber-600",
 };
 
-// Color accent theme options
-const ACCENT_COLORS = {
-  amber: {
-    light: "bg-amber-50",
-    medium: "bg-amber-100",
-    dark: "bg-amber-200",
-    text: "text-amber-600",
-    hover: "hover:text-amber-600",
-    border: "border-amber-200",
-    hoverBg: "hover:bg-amber-50",
-    button: "bg-amber-500",
-    buttonHover: "hover:bg-amber-600",
+// Sample job listings based on the screenshot
+const FEATURED_JOBS = [
+  {
+    id: "1",
+    company: "Outlier",
+    companyLogo: "https://logo.clearbit.com/outlier.org",
+    title: "Spanish (Mexico) Freelance Writer",
+    location: "Remote",
+    type: "Project-based",
+    postedDate: "04 Jan",
+    skills: ["Writing", "es Spanish"],
+    category: "Humanities & Social Sciences",
+    featured: true
   },
-  blue: {
-    light: "bg-blue-50",
-    medium: "bg-blue-100",
-    dark: "bg-blue-200", 
-    text: "text-blue-600",
-    hover: "hover:text-blue-600",
-    border: "border-blue-200",
-    hoverBg: "hover:bg-blue-50",
-    button: "bg-blue-500",
-    buttonHover: "hover:bg-blue-600",
+  {
+    id: "2",
+    company: "Outlier",
+    companyLogo: "https://logo.clearbit.com/outlier.org",
+    title: "Arabic (Egypt) Freelance Writer (US)",
+    location: "Remote",
+    type: "Project-based",
+    postedDate: "04 Jan",
+    skills: ["Writing", "ar Arabic"],
+    category: "Humanities & Social Sciences",
+    featured: true
   },
-  emerald: {
-    light: "bg-emerald-50",
-    medium: "bg-emerald-100",
-    dark: "bg-emerald-200",
-    text: "text-emerald-600",
-    hover: "hover:text-emerald-600",
-    border: "border-emerald-200",
-    hoverBg: "hover:bg-emerald-50",
-    button: "bg-emerald-500",
-    buttonHover: "hover:bg-emerald-600",
+  {
+    id: "3",
+    company: "Outlier",
+    companyLogo: "https://logo.clearbit.com/outlier.org",
+    title: "French Freelance Writer",
+    location: "Remote",
+    type: "Project-based",
+    postedDate: "03 Jan",
+    skills: ["Writing", "fr French"],
+    category: "Humanities & Social Sciences",
+    featured: false
+  },
+  {
+    id: "4",
+    company: "RemoteNext",
+    companyLogo: "https://logo.clearbit.com/remotenext.io",
+    title: "Senior React Developer",
+    location: "Remote",
+    type: "Full-time",
+    postedDate: "05 Jan",
+    skills: ["React", "TypeScript", "NextJS"],
+    category: "Software Development",
+    featured: true
+  },
+  {
+    id: "5",
+    company: "TechGlobal",
+    companyLogo: "https://logo.clearbit.com/techglobal.com",
+    title: "UX/UI Designer",
+    location: "Remote",
+    type: "Contract",
+    postedDate: "02 Jan",
+    skills: ["Figma", "Design Systems", "User Research"],
+    category: "Design",
+    featured: false
+  },
+  {
+    id: "6",
+    company: "HealthTech",
+    companyLogo: "https://logo.clearbit.com/healthtech.com",
+    title: "Medical Content Writer",
+    location: "Remote",
+    type: "Project-based",
+    postedDate: "06 Jan",
+    skills: ["Medical Writing", "Research", "Content Strategy"],
+    category: "Healthcare",
+    featured: true
   }
-};
+];
 
-// JobCard Component
-const JobCard = ({ 
-  job = sampleJob, 
-  accentColor = ACCENT_COLORS.emerald,
-  variant = "standard" // "standard", "minimal", or "detailed"
-}) => {
-  // Simple animation variants
-  const cardAnimation = {
-    rest: { 
+
+const JobCategories: React.FC = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const headerVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
       y: 0,
-      boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
-    },
-    hover: { 
-      y: -8, 
-      boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+      transition: {
+        duration: 0.7,
+        ease: [0.25, 0.1, 0.25, 1.0]
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: [0.25, 0.1, 0.25, 1.0]
+      }
     }
   };
 
   return (
-    <Link href={`/jobs/${job.id}`} className="block no-underline">
-      <motion.div
-        className={`bg-white rounded-xl border border-neutral-100 h-full group relative overflow-hidden`}
-        initial="rest"
-        whileHover="hover"
-        variants={cardAnimation}
-        transition={{ duration: 0.3, ease: "easeOut" }}
+    <div 
+      ref={sectionRef}
+      className="bg-gradient-to-b from-white to-neutral-50 py-16 md:py-24 px-4 sm:px-6 lg:px-8 w-full max-w-7xl mx-auto rounded-xl overflow-hidden"
+    >
+      <motion.div 
+        className="text-center mb-12 md:mb-20"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={containerVariants}
       >
-        {/* Hover background effect */}
+        <motion.h2
+          variants={headerVariants}
+          className="text-3xl md:text-5xl font-bold tracking-tight text-neutral-800"
+        >
+          <span className={ACCENT_COLOR.text}>Featured</span> Job Listings
+        </motion.h2>
+        <motion.p
+          variants={headerVariants}
+          className="mt-4 text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto"
+        >
+          Discover top remote opportunities from leading companies worldwide
+        </motion.p>
+      </motion.div>
+
+      <motion.div 
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        variants={containerVariants}
+      >
+        {FEATURED_JOBS.map((job, index) => (
+          <JobCard 
+            key={job.id}
+            job={job}
+            index={index}
+            variants={cardVariants}
+            accentColor={ACCENT_COLOR}
+          />
+        ))}
+      </motion.div>
+      
+      <motion.div
+        className="mt-12 text-center"
+        variants={headerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <Link href="/jobs">
+          <motion.button
+            className={`${ACCENT_COLOR.button} ${ACCENT_COLOR.buttonHover} text-white px-8 py-3 rounded-lg font-medium flex items-center gap-2 mx-auto transition-colors duration-300`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            View All Jobs
+            <ArrowRight className="w-4 h-4" />
+          </motion.button>
+        </Link>
+      </motion.div>
+      
+      <motion.div 
+        className="mt-24 mb-8 "
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={containerVariants}
+      >
+        <motion.h3
+          variants={headerVariants}
+          className="text-2xl md:text-3xl font-bold tracking-tight text-neutral-800 text-center mb-10"
+        >
+          Browse Job <span className={ACCENT_COLOR.text}>Categories</span>
+        </motion.h3>
+        
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {JOB_CATEGORIES.map((category, index) => (
+            <motion.div
+              key={category.id}
+              variants={cardVariants}
+              custom={index}
+              whileHover={{ y: -5, transition: { duration: 0.2 } }}
+            >
+              <Link href={`/jobs?category=${category.slug}`}>
+                <div className="bg-white p-4 rounded-xl shadow-sm border border-neutral-100 hover:shadow-md transition-all duration-300 h-full text-center group">
+                  <div className="flex justify-center mb-3">
+                    <div className={`bg-neutral-100 group-hover:${ACCENT_COLOR.medium} rounded-full p-3 transition-colors duration-300`}>
+                      <Briefcase className={`w-5 h-5 text-neutral-700 group-hover:${ACCENT_COLOR.text} transition-colors duration-300`} />
+                    </div>
+                  </div>
+                  <h4 className={`font-medium text-neutral-800 group-hover:${ACCENT_COLOR.text} transition-colors duration-300`}>{category.title}</h4>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
+interface JobCardProps {
+  job: {
+    id: string;
+    company: string;
+    companyLogo?: string;
+    title: string;
+    location: string;
+    type: string;
+    postedDate: string;
+    skills: string[];
+    category: string;
+    featured: boolean;
+  };
+  index: number;
+  variants: any;
+  accentColor: {
+    light: string;
+    medium: string;
+    text: string;
+    hover: string;
+    border: string;
+    hoverBg: string;
+    button: string;
+    buttonHover: string;
+  };
+}
+
+const JobCard: React.FC<JobCardProps> = ({ job, index, variants, accentColor }) => {
+  return (
+    <Link href={`/jobs/${job.id}`}>
+      <motion.div
+        variants={variants}
+        custom={index}
+        className={`bg-white p-6 md:p-6 rounded-xl shadow-sm border border-neutral-100 hover:shadow-md hover:border-amber-200 transition-all duration-300 h-full group relative overflow-hidden`}
+        whileHover={{ 
+          y: -8,
+          boxShadow: "0 20px 30px rgba(0, 0, 0, 0.07)",
+          transition: { duration: 0.3 }
+        }}
+      >
+        {/* Subtle accent background on hover */}
         <div className={`absolute inset-0 ${accentColor.light} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
         
-        {/* Featured tag */}
-        {job.featured && (
-          <div className="absolute top-4 right-4 z-10">
-            <div className="flex items-center gap-1">
-              <Star className={`w-4 h-4 ${accentColor.text} fill-current`} />
-              <span className={`${accentColor.medium} ${accentColor.text} text-xs font-semibold px-2.5 py-1 rounded-full`}>
-                Featured
-              </span>
-            </div>
-          </div>
-        )}
-        
-        <div className="relative z-10 p-6">
-          {/* Company Section */}
+        <div className="relative z-10">
           <div className="flex items-center mb-4">
-            <div className={`h-12 w-12 rounded-full ${accentColor.medium} flex items-center justify-center overflow-hidden transition-colors duration-300 shadow-sm`}>
+            <div className={`h-12 w-12 rounded-full ${accentColor.medium} flex items-center justify-center overflow-hidden transition-colors duration-300`}>
               {job.companyLogo ? (
                 <img 
                   src={job.companyLogo} 
@@ -114,53 +297,31 @@ const JobCard = ({
               )}
             </div>
             <div className="ml-3">
-              <p className="font-medium text-neutral-700">{job.company}</p>
+              <p className="text-lg font-medium text-neutral-600">{job.company}</p>
             </div>
           </div>
           
-          {/* Job Title */}
-          <h3 className={`text-xl font-bold text-neutral-800 group-hover:${accentColor.text} mb-3 transition-colors duration-300`}>
-            {job.title}
-          </h3>
+          <h3 className={`text-xl font-semibold text-neutral-800 group-hover:${accentColor.text} mb-3 transition-colors duration-300`}>{job.title}</h3>
           
-          {/* Core Job Details */}
-          <div className="flex flex-wrap gap-3 mb-4">
+          <div className="flex flex-wrap gap-2 mb-4">
             <div className="flex items-center text-sm text-neutral-600">
-              <MapPin className={`w-4 h-4 mr-1.5 group-hover:${accentColor.text}`} />
+              <MapPin className={`w-4 h-4 mr-1.5 group-hover:${accentColor.text} transition-colors duration-300`} />
               {job.location}
             </div>
+            <span className="text-neutral-400">|</span>
             <div className="flex items-center text-sm text-neutral-600">
-              <Briefcase className={`w-4 h-4 mr-1.5 group-hover:${accentColor.text}`} />
+              <Briefcase className={`w-4 h-4 mr-1.5 group-hover:${accentColor.text} transition-colors duration-300`} />
               {job.type}
             </div>
+            <span className="text-neutral-400">|</span>
             <div className="flex items-center text-sm text-neutral-600">
-              <Calendar className={`w-4 h-4 mr-1.5 group-hover:${accentColor.text}`} />
+              <Calendar className={`w-4 h-4 mr-1.5 group-hover:${accentColor.text} transition-colors duration-300`} />
               {job.postedDate}
             </div>
           </div>
-
-          {/* Additional Job Details - Show only in detailed variant */}
-          {(variant === "detailed" || variant === "standard") && (
-            <div className="flex flex-wrap gap-3 mb-4">
-              <div className={`flex items-center text-sm text-neutral-600 ${accentColor.light} px-2 py-1 rounded-md`}>
-                <DollarSign className={`w-3.5 h-3.5 mr-1 ${accentColor.text}`} />
-                {job.salary}
-              </div>
-              <div className={`flex items-center text-sm text-neutral-600 ${accentColor.light} px-2 py-1 rounded-md`}>
-                <BarChart className={`w-3.5 h-3.5 mr-1 ${accentColor.text}`} />
-                {job.experience}
-              </div>
-            </div>
-          )}
           
-          {/* Job Description - Show only in detailed variant */}
-          {variant === "detailed" && (
-            <p className="text-sm text-neutral-600 mb-5 line-clamp-2">{job.description}</p>
-          )}
-          
-          {/* Skills Tags */}
           <div className="flex flex-wrap gap-2 mb-5">
-            {job.skills.slice(0, variant === "minimal" ? 2 : job.skills.length).map((skill, idx) => (
+            {job.skills.map((skill, idx) => (
               <span 
                 key={idx} 
                 className={`${accentColor.light} ${accentColor.text} text-xs font-medium px-3 py-1 rounded-full group-hover:${accentColor.medium} transition-colors duration-300`}
@@ -168,53 +329,39 @@ const JobCard = ({
                 {skill}
               </span>
             ))}
-            {variant === "minimal" && job.skills.length > 2 && (
-              <span className="text-xs font-medium text-neutral-500 px-2 py-1">
-                +{job.skills.length - 2} more
-              </span>
-            )}
           </div>
           
-          {/* Footer */}
-          <div className="flex items-center justify-between mt-auto pt-3 border-t border-neutral-100 group-hover:border-opacity-0 transition-all duration-300">
-            <span className={`text-sm text-neutral-500 px-2 py-0.5 rounded ${accentColor.light} group-hover:${accentColor.medium} transition-colors duration-300`}>
-              {job.category}
-            </span>
+          <div className="flex items-center justify-between mt-auto pt-3 border-t border-neutral-100 group-hover:border-amber-200 transition-colors duration-300">
+            <span className="text-sm text-neutral-500">{job.category}</span>
             
             <motion.div
-              className={`text-sm font-medium ${accentColor.text} flex items-center gap-1.5`}
-              initial={{ x: 0 }}
-              whileHover={{ x: 4 }}
-              transition={{ duration: 0.2 }}
+              initial={{ opacity: 0.8 }}
+              whileHover={{ opacity: 1 }}
             >
-              View details
-              <ArrowRight className="w-4 h-4" />
+              <div className={`text-sm font-medium text-neutral-700 ${accentColor.hover} flex items-center gap-1.5 transition-colors duration-300`}>
+                View details
+                <motion.span
+                  initial={{ x: 0 }}
+                  whileHover={{ x: 4 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <ArrowRight className="w-4 h-4" />
+                </motion.span>
+              </div>
             </motion.div>
           </div>
         </div>
+        
+        {job.featured && (
+          <div className="absolute top-4 right-4 z-10">
+            <span className={`${accentColor.medium} ${accentColor.text} text-xs font-medium px-2.5 py-0.5 rounded-full`}>
+              🔥 Featured
+            </span>
+          </div>
+        )}
       </motion.div>
     </Link>
   );
 };
 
-// Preview component to show different variants
-export default function JobCardPreview() {
-  return (
-    <div className="grid grid-cols-1 gap-8 p-6 bg-neutral-50">
-      <div>
-        <h2 className="text-xl font-semibold mb-4 text-neutral-800">Emerald Theme (Standard)</h2>
-        <JobCard variant="standard" accentColor={ACCENT_COLORS.emerald} />
-      </div>
-      
-      <div>
-        <h2 className="text-xl font-semibold mb-4 text-neutral-800">Blue Theme (Detailed)</h2>
-        <JobCard variant="detailed" accentColor={ACCENT_COLORS.blue} />
-      </div>
-      
-      <div>
-        <h2 className="text-xl font-semibold mb-4 text-neutral-800">Amber Theme (Minimal)</h2>
-        <JobCard variant="minimal" accentColor={ACCENT_COLORS.amber} />
-      </div>
-    </div>
-  );
-}
+export default JobCategories;
